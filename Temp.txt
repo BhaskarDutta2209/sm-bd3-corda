@@ -1,0 +1,17 @@
+Create new client
+  clients node>>> flow start CreateClientAccount accountName: clientA, companyName: CompanyA  //Creates client account of CompanyB
+  clients node>>> flow start CreateClientAccount accountName: clientB, companyName: CompanyB  //Creates client account of CompanyA
+
+Issue Token
+  CompanyA node>>> flow start CreateAndIssueCoupon couponName: COUPON_A, value: 100, description: This is demo coupon A, receiver: clientA
+  	//Coupon issued by CompanyA to clientA
+  CompanyB node>>> flow start CreateAndIssueCoupon couponName: COUPON_B, value: 100, description: This is demo coupon B, receiver: clientB
+  	//Coupon issued by CompanyA to clientB
+
+Viewed Available Coupons
+  Clients node>>> flow start ViewCoupons whoAmI: clientA //view coupons of clientA
+  Clients node>>> flow start ViewCoupons whoAmI: clientB //view coupons of clientB
+
+View Issued Coupons
+  CompanyA node>>> flow start ListIssuedCoupons //view coupons issued by CompanyA
+  CompanyB node>>> flow start ListIssuedCoupons //view coupons issued by CompanyB
